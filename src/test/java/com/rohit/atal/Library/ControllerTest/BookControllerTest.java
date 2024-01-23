@@ -116,7 +116,7 @@ public class BookControllerTest {
 
     @Test
     public void deleteBookTest() throws Exception {
-        Mockito.when(bookService.getBookById(book2.getBookid())).thenReturn(Optional.ofNullable(book2));
+        Mockito.when(bookService.deletebook(13)).thenReturn(book2);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/books/13")
