@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     List<User> Userlist = new ArrayList<>();
 
     public List<User> getUserlist() {
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
         Userlist = userlist;
     }
 
-//    public UserServiceImpl(){
+    //    public UserServiceImpl(){
 //        Userlist.add(new User(13,"rohit"));
 //    }
     @Override
@@ -29,10 +29,10 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> getUserById(int Userid){
+    public Optional<User> getUserById(int Userid) {
         Optional<User> user = Optional.empty();
-        for(User obj : Userlist) {
-            if(obj.getUserid() == Userid){
+        for (User obj : Userlist) {
+            if (obj.getUserid() == Userid) {
                 user = Optional.of(obj);
                 break;
             }
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(int Userid, User updatedUser){
+    public User updateUser(int Userid, User updatedUser) {
         for (User obj : Userlist) {
             if (obj.getUserid() == Userid) {
                 obj.setUsername(updatedUser.getUsername());
@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public User deleteUser(Long Userid) {
         //Userlist.removeIf(obj -> obj.getUserid() == Userid);
-        for(User obj : Userlist){
-            if(obj.getUserid() == Userid) {
+        for (User obj : Userlist) {
+            if (obj.getUserid() == Userid) {
                 Userlist.remove(obj);
                 return obj;
             }

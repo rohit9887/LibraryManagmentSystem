@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     List<Book> BookCollection = new ArrayList<Book>();
 
 
@@ -22,7 +22,7 @@ public class BookServiceImpl implements BookService{
     }
 
     public BookServiceImpl() {
-        BookCollection.add(new Book(12,"physics","lovebabbar",true));
+        BookCollection.add(new Book(12, "physics", "lovebabbar", true));
     }
 
     @Override
@@ -52,8 +52,8 @@ public class BookServiceImpl implements BookService{
     @Override
     public Book deletebook(int Bookid) {
         //BookCollection.removeIf(obj -> obj.getBookid() == Bookid);
-        for(Book obj : BookCollection){
-            if(obj.getBookid() == Bookid) {
+        for (Book obj : BookCollection) {
+            if (obj.getBookid() == Bookid) {
                 BookCollection.remove(obj);
                 return obj;
             }
@@ -62,7 +62,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book updatebook(int Bookid, Book updatedbook)  {
+    public Book updatebook(int Bookid, Book updatedbook) {
         for (Book obj : BookCollection) {
             if (obj.getBookid() == Bookid) {
                 obj.setBookName(updatedbook.getBookName());

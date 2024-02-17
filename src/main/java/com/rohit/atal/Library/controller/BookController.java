@@ -13,8 +13,9 @@ import java.util.Optional;
 public class BookController {
     @Autowired
     private BookService bookService;
+
     @GetMapping
-    public List<Book> getAllBooks(){
+    public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
@@ -29,9 +30,10 @@ public class BookController {
     }
 
     @DeleteMapping("/{Bookid}")
-    public Book deleteBook(@PathVariable String Bookid){
+    public Book deleteBook(@PathVariable String Bookid) {
         return bookService.deletebook(Integer.parseInt(Bookid));
     }
+
     @PutMapping(path = "/{Bookid}", consumes = "application/json")
     public Book updatebook(@PathVariable String Bookid, @RequestBody Book updatedBook) {
         return bookService.updatebook(Integer.parseInt(Bookid), updatedBook);

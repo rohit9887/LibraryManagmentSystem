@@ -15,9 +15,10 @@ import java.util.Optional;
 public class TransactionController {
     @Autowired
     private TransactionService transactionService;
+
     @GetMapping
     public List<Transaction> getAllTransactions() {
-        return  transactionService.getAllTransactions();
+        return transactionService.getAllTransactions();
     }
 
     @GetMapping("/{id}")
@@ -29,10 +30,12 @@ public class TransactionController {
     public Transaction borrowBook(@RequestBody User user, @PathVariable int id) {
         return transactionService.borrowBook(user, id);
     }
+
     @PostMapping("/return/{id}")
     public Transaction returnBook(@PathVariable String id) {
         return transactionService.returnBook(Long.valueOf(id));
     }
+
     @PostMapping("/renew/{id}")
     public Transaction renewBook(@PathVariable String id) {
         return transactionService.renewBook(Long.valueOf(id));

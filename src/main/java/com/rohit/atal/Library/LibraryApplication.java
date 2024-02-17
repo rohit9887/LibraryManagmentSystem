@@ -8,8 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = "com.rohit.atal.Library")
 public class LibraryApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LibraryApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LibraryApplication.class, args);
+    }
 
 }

@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class TransactionServiceImpl implements TransactionService{
+public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private BookServiceImpl bookServiceimpl;
     List<Transaction> TransactionData = new ArrayList<>();
@@ -26,15 +26,14 @@ public class TransactionServiceImpl implements TransactionService{
         TransactionData = transactionData;
     }
 
-    public TransactionServiceImpl () {
+    public TransactionServiceImpl() {
         this.bookServiceimpl = new BookServiceImpl();
-        Book book = new Book(16,"maths","sitaram", true);
-        User user = new User(101,"rohit");
-        Transaction transaction = new Transaction(12L,new Book(16,"maths","sita",true),
-                new User(14,"rohit"), LocalDate.now(), LocalDate.now() );
+        Book book = new Book(16, "maths", "sitaram", true);
+        User user = new User(101, "rohit");
+        Transaction transaction = new Transaction(12L, new Book(16, "maths", "sita", true),
+                new User(14, "rohit"), LocalDate.now(), LocalDate.now());
         TransactionData.add(transaction);
     }
-
 
 
     @Override
@@ -45,8 +44,8 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public Optional<Transaction> getTransactionById(Long id) {
         Optional<Transaction> reault = Optional.empty();
-        for(Transaction obj : TransactionData) {
-            if(Objects.equals(obj.getId(), id)){
+        for (Transaction obj : TransactionData) {
+            if (Objects.equals(obj.getId(), id)) {
                 reault = Optional.of(obj);
                 break;
             }
@@ -55,12 +54,12 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction borrowBook(User user, int Bookid){
+    public Transaction borrowBook(User user, int Bookid) {
         Transaction transaction = new Transaction();
         //System.out.println("size : " + bookServiceimpl.BookCollection.size());
-        for(Book obj : bookServiceimpl.BookCollection){
-            if(obj.getBookid() == Bookid) {
-                if(obj.isAvailable()){
+        for (Book obj : bookServiceimpl.BookCollection) {
+            if (obj.getBookid() == Bookid) {
+                if (obj.isAvailable()) {
                     obj.setAvailable(false);
                     transaction.setId(1L);
                     transaction.setUser(user);
@@ -79,8 +78,8 @@ public class TransactionServiceImpl implements TransactionService{
     @Override
     public Transaction returnBook(Long id) {
         Transaction transaction = new Transaction();
-        for(Transaction obj : TransactionData) {
-            if(Objects.equals(obj.getId(), id)){
+        for (Transaction obj : TransactionData) {
+            if (Objects.equals(obj.getId(), id)) {
                 obj.setReturndate(LocalDate.now());
                 obj.getBook().setAvailable(true);
                 TransactionData.add(obj);
@@ -91,10 +90,10 @@ public class TransactionServiceImpl implements TransactionService{
     }
 
     @Override
-    public Transaction renewBook(Long id)  {
+    public Transaction renewBook(Long id) {
         Transaction transaction = new Transaction();
-        for(Transaction obj : TransactionData) {
-            if(Objects.equals(obj.getId(), id)){
+        for (Transaction obj : TransactionData) {
+            if (Objects.equals(obj.getId(), id)) {
                 //obj.setBorrowdate(LocalDate.now());
                 obj.setReturndate(LocalDate.now().plusWeeks(1));
                 TransactionData.add(obj);

@@ -41,18 +41,18 @@ public class UserControllerTest {
     @InjectMocks
     private UserController userController;
 
-    User user1 = new User(21,"Rohit");
-    User user2 = new User(22,"Devendra");
+    User user1 = new User(21, "Rohit");
+    User user2 = new User(22, "Devendra");
 
     @Before
-    public void SetUP(){
+    public void SetUP() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
     @Test
     public void getAllUsersTest() throws Exception {
-        List<User> userList = new ArrayList<>(Arrays.asList(user1,user2));
+        List<User> userList = new ArrayList<>(Arrays.asList(user1, user2));
 
         Mockito.when(userService.getAllUsers()).thenReturn(userList);
 
@@ -69,16 +69,16 @@ public class UserControllerTest {
         Mockito.when(userService.getUserById(user1.getUserid())).thenReturn(Optional.ofNullable(user1));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/users/21")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .get("/users/21")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$",notNullValue()))
-                .andExpect(jsonPath("$.username",is("Rohit")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.username", is("Rohit")));
     }
 
     @Test
     public void createUserTest() throws Exception {
-        User user = new User(25,"Mannu");
+        User user = new User(25, "Mannu");
 
         Mockito.when(userService.createUser(user)).thenReturn(user);
 
@@ -96,7 +96,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUserTest() throws Exception{
+    public void updateUserTest() throws Exception {
         User updateduser = new User(21, "Suraj");
 
         Mockito.when(userService.updateUser(21, updateduser)).thenReturn(updateduser);
@@ -110,12 +110,12 @@ public class UserControllerTest {
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",notNullValue()))
-                .andExpect(jsonPath("$.username",is("Suraj")));
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.username", is("Suraj")));
     }
 
     @Test
-    public void deleteUserTest() throws Exception{
+    public void deleteUserTest() throws Exception {
         Mockito.when(userService.deleteUser(22L)).thenReturn(user2);
 
         mockMvc.perform(MockMvcRequestBuilders

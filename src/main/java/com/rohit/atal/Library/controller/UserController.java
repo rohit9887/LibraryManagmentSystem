@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -25,17 +25,17 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @PutMapping(path = "/{id}", consumes = "application/json")
-    public User updateUser(@PathVariable String id, @RequestBody User updatedUser){
-        return userService.updateUser(Integer.parseInt(id),updatedUser);
+    public User updateUser(@PathVariable String id, @RequestBody User updatedUser) {
+        return userService.updateUser(Integer.parseInt(id), updatedUser);
     }
 
     @DeleteMapping("/{id}")
-    public User deleteUser(@PathVariable String id){
+    public User deleteUser(@PathVariable String id) {
         return userService.deleteUser(Long.valueOf(id));
     }
 }

@@ -42,23 +42,23 @@ public class BookControllerTest {
     @InjectMocks
     private BookController bookController;
 
-    Book book1 = new Book(12,"python","loverBabbar",true);
-    Book book2 = new Book(13,"DSA","Aman",true);
+    Book book1 = new Book(12, "python", "loverBabbar", true);
+    Book book2 = new Book(13, "DSA", "Aman", true);
 
     @Before
-    public void setUP(){
+    public void setUP() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
     }
 
     @Test
     public void getAllBooksTest() throws Exception {
-        List<Book> Booklist = new ArrayList<>(Arrays.asList(book1,book2));
+        List<Book> Booklist = new ArrayList<>(Arrays.asList(book1, book2));
         Mockito.when(bookService.getAllBooks()).thenReturn(Booklist);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/books")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .get("/books")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[1].bookName", is("DSA")));
@@ -69,16 +69,16 @@ public class BookControllerTest {
         Mockito.when(bookService.getBookById(book1.getBookid())).thenReturn(Optional.ofNullable(book1));
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/books/12")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .get("/books/12")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.bookName", is("python")));
     }
 
     @Test
-    public void addBook() throws Exception{
-        Book book = new Book(14,"data science","S.R.DAS",true);
+    public void addBook() throws Exception {
+        Book book = new Book(14, "data science", "S.R.DAS", true);
 
         Mockito.when(bookService.addBook(book)).thenReturn(book);
 
@@ -97,9 +97,9 @@ public class BookControllerTest {
 
     @Test
     public void updatebookTest() throws Exception {
-        Book updatedbook = new Book(12,"Machine Learning", "Dirk P. Kroese",true);
+        Book updatedbook = new Book(12, "Machine Learning", "Dirk P. Kroese", true);
 
-        Mockito.when(bookService.updatebook(12,updatedbook)).thenReturn(updatedbook);
+        Mockito.when(bookService.updatebook(12, updatedbook)).thenReturn(updatedbook);
 
         String updatedcontent = objectWriter.writeValueAsString(updatedbook);
 
@@ -110,8 +110,8 @@ public class BookControllerTest {
 
         mockMvc.perform(mockHttpServletRequestBuilder)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",notNullValue()))
-                .andExpect(jsonPath("$.bookName",is("Machine Learning")));
+                .andExpect(jsonPath("$", notNullValue()))
+                .andExpect(jsonPath("$.bookName", is("Machine Learning")));
     }
 
     @Test
@@ -119,8 +119,8 @@ public class BookControllerTest {
         Mockito.when(bookService.deletebook(13)).thenReturn(book2);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/books/13")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .delete("/books/13")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 }

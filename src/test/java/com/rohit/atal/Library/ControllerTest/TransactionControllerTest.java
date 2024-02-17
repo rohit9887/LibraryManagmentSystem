@@ -40,12 +40,12 @@ public class TransactionControllerTest {
     @InjectMocks
     TransactionController transactionController;
 
-    Book book = new Book(12,"python","loverBabbar",true);
-    User user = new User(21,"Rohit");
-    Transaction transaction1 = new Transaction(31L, book,user, LocalDate.now(),LocalDate.now().plusWeeks(1));
+    Book book = new Book(12, "python", "loverBabbar", true);
+    User user = new User(21, "Rohit");
+    Transaction transaction1 = new Transaction(31L, book, user, LocalDate.now(), LocalDate.now().plusWeeks(1));
 
     @Before
-    public void setUP(){
+    public void setUP() {
         MockitoAnnotations.initMocks(this);
         this.mockMvc = MockMvcBuilders.standaloneSetup(transactionController).build();
     }
@@ -57,11 +57,11 @@ public class TransactionControllerTest {
         Mockito.when(transactionService.getAllTransactions()).thenReturn(Transactionlist);
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get("/transactions")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .get("/transactions")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].returndate",notNullValue()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].returndate", notNullValue()));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class TransactionControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$", notNullValue()))
-                .andExpect(jsonPath("$.returndate",notNullValue()));
+                .andExpect(jsonPath("$.returndate", notNullValue()));
     }
 
 }
